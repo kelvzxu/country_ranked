@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Fetch countries from API
 export const fetchCountries = createAsyncThunk('countries/fetchCountries', async () => {
   const response = await axios.get('https://restcountries.com/v3.1/all');
-  return response.data
+  const countries = response.data
     .map((country) => ({
       name: country.name.common,
       officialName: country.name.official,
@@ -14,17 +15,25 @@ export const fetchCountries = createAsyncThunk('countries/fetchCountries', async
       maps: country.maps.googleMaps,
       timezones: country.timezones,
       languages: country.languages,
-      continents: country.continents,
+      subregion: country.subregion,
       code: country.cca2,
       flag: country.flags.png,
+      area: country.area,
+      symbol: country.coatOfArms,
+      phonecode: country.idd,
     }))
     .sort((a, b) => b.population - a.population);
+  
+  // Store the fetched countries in localStorage
+  localStorage.setItem('countries', JSON.stringify(countries));
+
+  return countries;
 });
 
 const countrySlice = createSlice({
   name: 'countries',
   initialState: {
-    data: [],
+    data: JSON.parse(localStorage.getItem('countries')) || [],  // Retrieve from localStorage if available
     loading: false,
     error: null,
   },
