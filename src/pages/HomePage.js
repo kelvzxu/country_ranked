@@ -57,7 +57,7 @@ const HomePage = () => {
       
       <div className="row mb-4">
         <div className="col-md-8">
-          <h6 className="display-4">Countries Ranked by Population</h6>
+          <div className="display-6">Countries Ranked by Population</div>
         </div>
         <div className="col-md-4 text-md-end">
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} view={view} setView={setView} />
