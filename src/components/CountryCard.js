@@ -24,15 +24,33 @@ const CountryCard = ({ data }) => {
               </span>
             </div>
             <div className="card-body">
-              <p className="card-text">
-                <strong>Region:</strong> {country.region}
-              </p>
-              <p className="card-text">
-                <strong>Code:</strong> {country.code}
-              </p>
-              <p className="card-text">
-                <strong>Population:</strong> {country.population.toLocaleString()}
-              </p>
+              {/* Symbol on the left */}
+              <div className="d-flex align-items-center">
+                {country.symbol && (
+                  <img
+                    src={country.symbol.png}
+                    alt={`${country.name} symbol`}
+                    style={{
+                      width: "50px", // Adjust size as needed
+                      height: "50px",
+                      marginRight: "10px", // Space between symbol and text
+                    }}
+                  />
+                )}
+
+                {/* Country details on the right */}
+                <div>
+                  <p className="card-text">
+                    <strong>Region:</strong> {country.region}
+                  </p>
+                  <p className="card-text">
+                    <strong>Code:</strong> {country.code}
+                  </p>
+                  <p className="card-text">
+                    <strong>Population:</strong> {country.population.toLocaleString()}
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="card-footer text-end">
               <Link to={`/country/${country.name}`} className="btn btn-sm btn-outline-primary">
