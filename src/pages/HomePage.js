@@ -5,6 +5,8 @@ import SearchBar from "../components/SearchBar";
 import CountryTable from "../components/CountryTable";
 import CountryCard from "../components/CountryCard";
 import Pagination from "../components/Pagination";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorFallback from "../components/ErrorFallback";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -62,6 +64,10 @@ const HomePage = () => {
   const currentPageData = sortedCountries.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(sortedCountries.length / itemsPerPage);
 
+  const handleRetry = () => {
+    dispatch(fetchCountries());
+  };
+
   const handlePreviousClick = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
@@ -77,8 +83,8 @@ const HomePage = () => {
     }));
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorFallback errorMessage={error} onRetry={handleRetry} />;
 
   return (
     <div className="container-fluit">
