@@ -19,8 +19,19 @@ const CompareResultPage = () => {
         {/* Country 1 Info Card */}
         <Col md={6} className="mb-4">
           <Card>
-            <Card.Header className="bg-primary text-white">
+          <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
+              {/* Country Name */}
               <h4>{country1.name}</h4>
+              
+              {/* Country Symbol */}
+              {country1.symbol && (
+                <img
+                  src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  alt={`${country1.name} symbol`}
+                  className="img-fluid"
+                  style={{ maxWidth: '25px', maxHeight: '25px', marginLeft: '20px' }}
+                />
+              )}
             </Card.Header>
             <Card.Body>
               <img src={country1.flag} alt={`${country1.name} flag`} className="img-fluid" style={{ maxWidth: '100px' }} />
@@ -70,8 +81,17 @@ const CompareResultPage = () => {
         {/* Country 2 Info Card */}
         <Col md={6} className="mb-4">
           <Card>
-            <Card.Header className="bg-success text-white">
+            <Card.Header className="bg-success text-white d-flex justify-content-between align-items-center">
               <h4>{country2.name}</h4>
+              {/* Country Symbol */}
+              {country1.symbol && (
+                <img
+                  src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  alt={`${country2.name} symbol`}
+                  className="img-fluid"
+                  style={{ maxWidth: '25px', marginLeft: '20px' }}
+                />
+              )}
             </Card.Header>
             <Card.Body>
               <img src={country2.flag} alt={`${country2.name} flag`} className="img-fluid" style={{ maxWidth: '100px' }} />

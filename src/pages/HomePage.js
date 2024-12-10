@@ -14,6 +14,7 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [selectedRegion, setSelectedRegion] = useState("");
 
   const itemsPerPage = 10;
 
@@ -21,10 +22,37 @@ const HomePage = () => {
     dispatch(fetchCountries());
   }, [dispatch]);
 
-  const filteredCountries = countries.filter((country) =>
-    country.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Detect screen size and set default view based on it
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setView("kanban"); // Set to 'kanban' (CountryCard) for mobile screens
+      } else {
+        setView("list"); // Set to 'list' (CountryTable) for larger screens
+      }
+    };
 
+    // Initial check
+    handleResize();
+
+    // Event listener to handle screen resizing
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty dependency array means this effect runs only once on mount
+
+  // Get unique regions
+  const regions = [...new Set(countries.map((country) => country.region).filter(Boolean))];
+
+  // Filter countries
+  const filteredCountries = countries.filter((country) => {
+    const matchesSearchTerm = country.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRegion = selectedRegion ? country.region === selectedRegion : true;
+    return matchesSearchTerm && matchesRegion;
+  });
+
+  // Sort countries
   const sortedCountries = [...filteredCountries].sort((a, b) => {
     if (!sortConfig.key) return 0;
     const aValue = a[sortConfig.key];
@@ -38,8 +66,12 @@ const HomePage = () => {
   const currentPageData = sortedCountries.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(sortedCountries.length / itemsPerPage);
 
-  const handlePageClick = (event) => {
-    setCurrentPage(event.selected);
+  const handlePreviousClick = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, pageCount - 1));
   };
 
   const handleSort = (key) => {
@@ -53,22 +85,45 @@ const HomePage = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="container mt-5">
-      
-      <div className="row mb-4">
-        <div className="col-md-8">
-          <div className="display-6">Countries Ranked by Population</div>
-        </div>
-        <div className="col-md-4 text-md-end">
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} view={view} setView={setView} />
+    <div className="container-fluit">
+      {/* Header */}
+      <div className="o_control_panel d-flex flex-column gap-3 gap-lg-1 px-3 pt-2 pb-3">
+        <div className="o_control_panel_main d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-lg-start gap-3 flex-grow-1">
+          <div className="o_control_panel_breadcrumbs d-flex align-items-center gap-1 order-0 h-lg-100">
+            <div className="min-w-0 text-truncate">
+              <h5>Countries Ranked by Population</h5>
+            </div>
+          </div>
+          <div className="o_control_panel_navigation d-flex flex-wrap flex-md-nowrap justify-content-end gap-3 gap-lg-1 gap-xl-3 order-1 order-lg-2 flex-grow-1">
+            <SearchBar
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              regions={regions}
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+            />
+            <Pagination
+              currentPage={currentPage}
+              pageCount={pageCount}
+              handlePreviousClick={handlePreviousClick}
+              handleNextClick={handleNextClick}
+              view={view}
+              setView={setView}
+            />
+          </div>
         </div>
       </div>
+
+      {/* Content */}
       {view === "list" ? (
-        <CountryTable data={currentPageData} handleSort={handleSort} sortConfig={sortConfig} />
+        <CountryTable
+          data={currentPageData}
+          handleSort={handleSort}
+          sortConfig={sortConfig}
+        />
       ) : (
         <CountryCard data={currentPageData} />
       )}
-      <Pagination pageCount={pageCount} handlePageClick={handlePageClick} />
     </div>
   );
 };

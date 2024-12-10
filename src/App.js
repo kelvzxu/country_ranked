@@ -7,6 +7,7 @@ import CompareResultPage from './pages/CompareResult';
 import NewsPage from './pages/NewsPage';
 import CountryDetailPage from './pages/CountryDetailPage';
 
+
 const App = () => {
   return (
     <div>

@@ -77,3 +77,39 @@ img {
   height: 130px; /* Set to desired height */
   object-fit: contain; /* Ensure flags fit within the box, maintaining aspect ratio */
 }
+
+.o_control_panel {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+  border-bottom: var(--ControlPanel-border-bottom, 1px solid #d8dadd);
+  background-color: white;
+}
+
+.o_control_panel_breadcrumb {
+  min-width: 200px;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.min-w-0 {
+  min-width: 0 !important;
+}
+
+
+.o_control_panel h2 {
+  font-size: 1.5rem;
+}
+
+.o_control_panel .btn-group .btn {
+  border-radius: 0.25rem;
+}
+
+.o_control_panel input {
+  max-width: 300px;
+}
+
