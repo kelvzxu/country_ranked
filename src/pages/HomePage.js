@@ -22,23 +22,19 @@ const HomePage = () => {
     dispatch(fetchCountries());
   }, [dispatch]);
 
-  // Detect screen size and set default view based on it
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
-        setView("kanban"); // Set to 'kanban' (CountryCard) for mobile screens
-      } else {
-        setView("list"); // Set to 'list' (CountryTable) for larger screens
+        setView("kanban"); 
+        setView("list"); 
       }
     };
 
     // Initial check
     handleResize();
 
-    // Event listener to handle screen resizing
     window.addEventListener("resize", handleResize);
 
-    // Clean up the event listener when the component unmounts
     return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty dependency array means this effect runs only once on mount
 

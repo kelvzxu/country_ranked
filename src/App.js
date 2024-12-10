@@ -18,6 +18,7 @@ const App = () => {
         <Route path="/news" element={<NewsPage />} />
         <Route path="/country/:name" element={<CountryDetailPage />} />
         <Route path="/compare/result" element={<CompareResultPage />} />  
+        <Route path="/category/:category" element={<NewsPage />} />
       </Routes>
     </div>
   );

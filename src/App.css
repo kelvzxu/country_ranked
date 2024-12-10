@@ -100,11 +100,6 @@ img {
   min-width: 0 !important;
 }
 
-
-.o_control_panel h2 {
-  font-size: 1.5rem;
-}
-
 .o_control_panel .btn-group .btn {
   border-radius: 0.25rem;
 }
@@ -112,4 +107,51 @@ img {
 .o_control_panel input {
   max-width: 300px;
 }
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
+  transition: width 0.3s ease-in-out;
+  color: #fff;
+}
+
+.sidebar:hover {
+  width: 280px; 
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+.category-link {
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+}
+
+.category-link:hover {
+  background-color: #444; 
+  color: #f1c40f; 
+}
+
+.category-link .mr-3 {
+  font-size: 1.5rem; 
+}
+
+.category-link:hover .mr-3 {
+  color: #f1c40f;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; 
+    position: relative;
+  }
+}
+
 
