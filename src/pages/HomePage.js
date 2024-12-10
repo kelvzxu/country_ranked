@@ -24,22 +24,22 @@ const HomePage = () => {
     dispatch(fetchCountries());
   }, [dispatch]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setView("kanban"); 
-        setView("list"); 
-      }
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth <= 768) {
+  //       setView("kanban"); 
+  //       setView("list"); 
+  //     }
+  //   };
 
-    // Initial check
-    handleResize();
+  //   // Initial check
+  //   handleResize();
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty dependency array means this effect runs only once on mount
-
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []); 
+  
   // Get unique regions
   const regions = [...new Set(countries.map((country) => country.region).filter(Boolean))];
 
