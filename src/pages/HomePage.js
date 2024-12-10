@@ -16,7 +16,7 @@ const HomePage = () => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [selectedRegion, setSelectedRegion] = useState("");
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 50;
 
   useEffect(() => {
     dispatch(fetchCountries());
