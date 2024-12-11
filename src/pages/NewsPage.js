@@ -6,6 +6,8 @@ import MainContent from '../components/newsContent';
 import Footer from '../components/Footer';
 import { fetchNews } from '../store/newsSlice';
 import "./styles/NewsPage.css";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorFallback from "../components/ErrorFallback";
 
 const NewsPage = () => {
   const { category } = useParams(); // Ambil parameter category dari URL
@@ -17,8 +19,12 @@ const NewsPage = () => {
     dispatch(fetchNews(category || 'home')); // Default ke 'home' jika tidak ada category
   }, [category, dispatch]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const handleRetry = () => {
+    dispatch(fetchNews());
+  };
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorFallback errorMessage={error} onRetry={handleRetry} />;
 
   return (
     <div>
