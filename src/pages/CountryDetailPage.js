@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa'; 
 import ControlPanel from "../components/ControlPanel";
+import MapComponent from "../components/MapsBox";
+
 
 const CountryDetailPage = () => {
   const { name } = useParams();
@@ -28,9 +30,9 @@ const CountryDetailPage = () => {
     symbol, 
     phonecode,
     languages,
+    latlng,
   } = country;
 
-  // Converting currencies into an array to display in a table
   const currencyList = currencies ? Object.entries(currencies) : [];
   const countrySymbol = symbol ? symbol.png : false;
 
@@ -137,6 +139,10 @@ const CountryDetailPage = () => {
                   ) : (
                     <p>No currency data available.</p>
                   )}
+
+                  {/* Peta */}
+                  <h4 className="mt-4">Map</h4>
+                  <MapComponent latlng={latlng} countryName={country.name} mapsHeight='250px' mapsWidth='100%'/>
                 </div>
               </div>
             </div>

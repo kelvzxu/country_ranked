@@ -2,16 +2,16 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Badge, Card, Col, Row, Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';  // Import to get the country data from Redux
+import { useSelector } from 'react-redux'; 
+import MapComponent from "../components/MapsBox";
 
 const CompareResultPage = () => {
-  const { countryCode1, countryCode2 } = useParams();  // Access the route params
-  const countries = useSelector(state => state.countries.data);  // Get countries data from Redux
+  const { countryCode1, countryCode2 } = useParams(); 
+  const countries = useSelector(state => state.countries.data); 
 
   const country1 = countries.find(c => c.code === countryCode1);
   const country2 = countries.find(c => c.code === countryCode2);
 
-  // If either of the countries is not found, show an error message
   if (!country1 || !country2) {
     return <div className="alert alert-danger text-center">Invalid comparison</div>;
   }
@@ -31,7 +31,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  src={country1.symbol.png}
                   alt={`${country1.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', maxHeight: '25px', marginLeft: '20px' }}
@@ -74,6 +74,12 @@ const CompareResultPage = () => {
                     <td><strong>Continent</strong></td>
                     <td>{country1.subregion || 'N/A'}</td>
                   </tr>
+                  <tr>
+                    <td><strong>Maps</strong></td>
+                    <td>
+                      <MapComponent latlng={country1.latlng} countryName={country1.name} mapsHeight='250px' mapsWidth='100%'/>
+                    </td>
+                  </tr>
                 </tbody>
               </Table>
               <a href={country1.maps} target="_blank" rel="noopener noreferrer">
@@ -91,7 +97,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  src={country2.symbol.png}
                   alt={`${country2.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', marginLeft: '20px' }}
@@ -133,6 +139,12 @@ const CompareResultPage = () => {
                   <tr>
                     <td><strong>Continent</strong></td>
                     <td>{country2.subregion || 'N/A'}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Maps</strong></td>
+                    <td>
+                      <MapComponent latlng={country2.latlng} countryName={country2.name} mapsHeight='250px' mapsWidth='100%'/>
+                    </td>
                   </tr>
                 </tbody>
               </Table>
@@ -177,7 +189,7 @@ const CompareResultPage = () => {
                   <td>
                     {country1.symbol && (
                       <img
-                        src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                        src={country1.symbol.png}
                         alt={`${country1.name} symbol`}
                         style={{ width: '50px' }}
                       />
@@ -186,7 +198,7 @@ const CompareResultPage = () => {
                   <td>
                     {country2.symbol && (
                       <img
-                        src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                        src={country2.symbol.png}
                         alt={`${country2.name} symbol`}
                         style={{ width: '50px' }}
                       />

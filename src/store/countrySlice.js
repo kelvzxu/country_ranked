@@ -21,6 +21,7 @@ export const fetchCountries = createAsyncThunk('countries/fetchCountries', async
       area: country.area,
       symbol: country.coatOfArms,
       phonecode: country.idd,
+      latlng: country.latlng,
     }))
     .sort((a, b) => b.population - a.population);
   
