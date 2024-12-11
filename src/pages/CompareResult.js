@@ -1,15 +1,20 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom'; 
-import { FaArrowLeft } from 'react-icons/fa'; 
-import { Badge, Card, Col, Row, Table } from 'react-bootstrap'; 
+import { useParams, Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Badge, Card, Col, Row, Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';  // Import to get the country data from Redux
 
 const CompareResultPage = () => {
-  const location = useLocation();
-  const { countries } = location.state || {}; 
+  const { countryCode1, countryCode2 } = useParams();  // Access the route params
+  const countries = useSelector(state => state.countries.data);  // Get countries data from Redux
 
-  if (!countries || countries.length !== 2) return <div className="alert alert-danger text-center">Invalid comparison</div>;
+  const country1 = countries.find(c => c.code === countryCode1);
+  const country2 = countries.find(c => c.code === countryCode2);
 
-  const [country1, country2] = countries;
+  // If either of the countries is not found, show an error message
+  if (!country1 || !country2) {
+    return <div className="alert alert-danger text-center">Invalid comparison</div>;
+  }
 
   return (
     <div className="container mt-5">
@@ -26,7 +31,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country1.symbol.png} 
+                  src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
                   alt={`${country1.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', maxHeight: '25px', marginLeft: '20px' }}
@@ -86,7 +91,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country2.symbol.png} 
+                  src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
                   alt={`${country2.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', marginLeft: '20px' }}
@@ -172,7 +177,7 @@ const CompareResultPage = () => {
                   <td>
                     {country1.symbol && (
                       <img
-                        src={country1.symbol.png} 
+                        src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
                         alt={`${country1.name} symbol`}
                         style={{ width: '50px' }}
                       />
@@ -181,7 +186,7 @@ const CompareResultPage = () => {
                   <td>
                     {country2.symbol && (
                       <img
-                        src={country2.symbol.png} 
+                        src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
                         alt={`${country2.name} symbol`}
                         style={{ width: '50px' }}
                       />
@@ -189,6 +194,7 @@ const CompareResultPage = () => {
                   </td>
                   <td>Country symbols displayed</td>
                 </tr>
+                    
 
                 {/* Official Name Comparison */}
                 <tr>

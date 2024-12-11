@@ -14,10 +14,11 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/compare" element={<ComparePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/country/:name" element={<CountryDetailPage />} />
-        <Route path="/compare/result" element={<CompareResultPage />} />  
+        <Route path="/compare" element={<ComparePage />} />
+        <Route path="/compare/:countryCode1/n/:countryCode2" element={<CompareResultPage />} />
+
         <Route path="/category/:category" element={<NewsPage />} />
       </Routes>
     </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -11,7 +10,6 @@ import './styles/ComparePage.css';
 const ComparePage = () => {
   const navigate = useNavigate();
   const countries = useSelector(state => state.countries.data);
-  console.log(countries);
   const [selectedCountries, setSelectedCountries] = useState([null, null]);
 
   const handleSelectCountry = (index, countryCode) => {
@@ -23,9 +21,12 @@ const ComparePage = () => {
   };
 
   const handleCompare = () => {
-  
     if (selectedCountries[0] && selectedCountries[1]) {
-      navigate('/compare/result', { state: { countries: selectedCountries } });
+      const countryCode1 = selectedCountries[0].code;
+      const countryCode2 = selectedCountries[1].code;
+      
+      // Navigasi ke halaman compare dengan kode negara di URL
+      navigate(`/compare/${countryCode1}/n/${countryCode2}`);
     }
   };
 
