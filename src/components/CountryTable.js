@@ -1,7 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CountryTable = ({ data, handleSort, sortConfig }) => {
+
+  const navigate = useNavigate();
+
+  const handleRowClick = (countryName) => {
+    navigate(`/country/${countryName}`);
+  };
+
   return (
     <div className="table-responsive">
       <table className="table table-striped table-hover align-middle">
@@ -24,12 +31,12 @@ const CountryTable = ({ data, handleSort, sortConfig }) => {
         </thead>
         <tbody>
           {data.map((country, index) => (
-            <tr key={index}>
-              <td>
-                <Link to={`/country/${country.name}`} className="text-decoration-none text-primary">
-                  {country.name}
-                </Link>
-              </td>
+            <tr
+              key={index}
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleRowClick(country.name)}  
+            >
+              <td>{country.name}</td>
               <td>{country.region}</td>
               <td>{country.population.toLocaleString()}</td>
               <td>{country.code}</td>

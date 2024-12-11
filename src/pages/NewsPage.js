@@ -10,13 +10,12 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorFallback from "../components/ErrorFallback";
 
 const NewsPage = () => {
-  const { category } = useParams(); // Ambil parameter category dari URL
+  const { category } = useParams(); 
   const dispatch = useDispatch();
   const { articles, loading, error } = useSelector(state => state.news);
 
   useEffect(() => {
-    // Dispatch action fetchNews ketika category berubah
-    dispatch(fetchNews(category || 'home')); // Default ke 'home' jika tidak ada category
+    dispatch(fetchNews(category || 'home')); 
   }, [category, dispatch]);
 
   const handleRetry = () => {
@@ -29,8 +28,8 @@ const NewsPage = () => {
   return (
     <div>
       <div className="d-flex">
-        <Sidebar /> {/* Sidebar di sebelah kiri */}
-        <div className="flex-grow-1"> {/* Konten utama mengambil sisa ruang */}
+        <Sidebar />
+        <div className="flex-grow-1"> 
           <MainContent articles={articles} />
         </div>
       </div>

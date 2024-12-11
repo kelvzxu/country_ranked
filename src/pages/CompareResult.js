@@ -1,11 +1,11 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom'; // To access state passed during redirection
-import { FaArrowLeft } from 'react-icons/fa'; // For back button icon
-import { Badge, Card, Col, Row, Table } from 'react-bootstrap'; // Bootstrap components
+import { useLocation, Link } from 'react-router-dom'; 
+import { FaArrowLeft } from 'react-icons/fa'; 
+import { Badge, Card, Col, Row, Table } from 'react-bootstrap'; 
 
 const CompareResultPage = () => {
   const location = useLocation();
-  const { countries } = location.state || {}; // Get selected countries from the state
+  const { countries } = location.state || {}; 
 
   if (!countries || countries.length !== 2) return <div className="alert alert-danger text-center">Invalid comparison</div>;
 
@@ -26,7 +26,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country1.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  src={country1.symbol.png} 
                   alt={`${country1.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', maxHeight: '25px', marginLeft: '20px' }}
@@ -86,7 +86,7 @@ const CompareResultPage = () => {
               {/* Country Symbol */}
               {country1.symbol && (
                 <img
-                  src={country2.symbol.png} // Assuming `symbol` contains an object with a `png` property
+                  src={country2.symbol.png} 
                   alt={`${country2.name} symbol`}
                   className="img-fluid"
                   style={{ maxWidth: '25px', marginLeft: '20px' }}
@@ -164,6 +164,30 @@ const CompareResultPage = () => {
                     <img src={country2.flag} alt={`${country2.name} flag`} style={{ width: '50px' }} />
                   </td>
                   <td>Flags displayed</td>
+                </tr>
+
+                {/* Symbol Comparison */}
+                <tr>
+                  <td>Symbol</td>
+                  <td>
+                    {country1.symbol && (
+                      <img
+                        src={country1.symbol.png} 
+                        alt={`${country1.name} symbol`}
+                        style={{ width: '50px' }}
+                      />
+                    )}
+                  </td>
+                  <td>
+                    {country2.symbol && (
+                      <img
+                        src={country2.symbol.png} 
+                        alt={`${country2.name} symbol`}
+                        style={{ width: '50px' }}
+                      />
+                    )}
+                  </td>
+                  <td>Country symbols displayed</td>
                 </tr>
 
                 {/* Official Name Comparison */}

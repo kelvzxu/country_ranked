@@ -12,7 +12,7 @@ const CountryFlag = ({ selectedCountry }) => {
             className="img-fluid border rounded-lg shadow flag-size"
           />
         ) : (
-          <div className="border p-4" style={{ width: '200px', height: '130px' }}>
+          <div className="border p-4 text-white" style={{ width: '200px', height: '130px' }}>
             <span>Select Country</span>
           </div>
         )}
