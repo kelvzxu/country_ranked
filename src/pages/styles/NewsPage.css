@@ -1,0 +1,116 @@
+/* src/components/MainContent.css */
+
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-left: 20px;
+}
+
+.article-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.article-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.article-card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.article-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* src/components/Sidebar.css */
+
+.sidebar {
+  background-color: #f5f5f5;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.sidebar ul li a:hover {
+  background-color: #e5e5e5;
+}
+
+
+p.card-text.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+
+@media (min-width: 768px) {
+  p.card-text.text-ellipsis {
+    white-space: normal; 
+    overflow: hidden;
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+  }
+}
+
+.sidebar .category-link span {
+  display: inline-block; 
+  margin-right: 10px;
+}
+
+.sidebar .category-link {
+  font-size: 1rem; 
+}
+
+/* Tampilan mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px; 
+  }
+
+  .sidebar h4 {
+    display: none; 
+  }
+
+  .sidebar .category-link {
+    justify-content: center; 
+    padding: 10px 0; 
+    font-size: 0; 
+  }
+
+  .sidebar .category-link span {
+    margin-right: 0; 
+    font-size: 1.5rem; 
+  }
+}
